@@ -42,6 +42,66 @@ class Solution implements \LeetCode\SolutionInterface
         //
         // return null;
 
-        return $result; // return null;
+        return $result;
+    }
+
+    /**
+     * sample 8 ms submission
+     */
+    function anotherAnswer2(array $arr): array
+    {
+        $newArr = [];
+        $length = count($arr);
+        $count = 0;
+
+        for ($i = 0; $i < $length; $i++) {
+            if ($arr[$i] === 0 && $count < $length - 1) {
+                $newArr[] = 0;
+                $newArr[] = 0;
+                $count += 2;
+            } else {
+                $newArr[] = $arr[$i];
+                $count++;
+            }
+
+            if ($count === $length) {
+                return $newArr;
+            }
+        }
+
+        return $newArr;
+    }
+
+    /**
+     * sample 12 ms submission
+     */
+    function anotherAnswer1(array $arr): array
+    {
+        $length = count($arr);
+        $zeros = 0;
+
+        // count the number of zero at first
+        foreach ($arr as $num) {
+            if ($num === 0) {
+                $zeros++;
+            }
+        }
+
+        // original code: "for ($i = $len-1; $i >= 0; $i--) {"
+        for ($i = $length - 1; $zeros > 0; $i--) {
+            if ($i + $zeros < $length) {
+                $arr[$i + $zeros] = $arr[$i];
+            }
+
+            if ($arr[$i] === 0) {
+                $zeros--;
+
+                if ($i + $zeros < $length) {
+                    $arr[$i + $zeros] = 0;
+                }
+            }
+        }
+
+        return $arr;
     }
 }
