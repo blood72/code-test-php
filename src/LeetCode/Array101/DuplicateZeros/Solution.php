@@ -14,7 +14,7 @@ class Solution implements \LeetCode\SolutionInterface
      * Runtime: 16 ms
      * Memory Usage: 16.7 MB
      */
-    function duplicateZeros(array $arr): array
+    function duplicateZeros(array &$arr)
     {
         $length = count($arr);
         $indexes = 0;
@@ -36,19 +36,15 @@ class Solution implements \LeetCode\SolutionInterface
 
             $i++;
         }
+        $arr = $result;
 
-        // original answer (Do the above modifications to the input array in place && output should be "null")
-        // $arr = $result;
-        //
-        // return null;
-
-        return $result;
+        return null;
     }
 
     /**
      * sample 8 ms submission
      */
-    function anotherAnswer2(array $arr): array
+    function anotherAnswer1(array &$arr)
     {
         $newArr = [];
         $length = count($arr);
@@ -65,17 +61,19 @@ class Solution implements \LeetCode\SolutionInterface
             }
 
             if ($count === $length) {
-                return $newArr;
+                $arr = $newArr;
+                return null;
             }
         }
 
-        return $newArr;
+        $arr = $newArr;
+        return null;
     }
 
     /**
      * sample 12 ms submission
      */
-    function anotherAnswer1(array $arr): array
+    function anotherAnswer2(array &$arr)
     {
         $length = count($arr);
         $zeros = 0;
@@ -102,6 +100,25 @@ class Solution implements \LeetCode\SolutionInterface
             }
         }
 
-        return $arr;
+        return null;
+    }
+
+    /**
+     * sample 12 ms submission
+     */
+    function anotherAnswer3(array &$arr)
+    {
+        $n = count($arr);
+        $result = [];
+
+        foreach ($arr as $key => $val) {
+            if ($val === 0) {
+                $result[] = 0;
+            }
+
+            $result[] = $val;
+        }
+
+        $arr = array_slice($result, 0, $n);
     }
 }

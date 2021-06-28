@@ -21,13 +21,14 @@ abstract class TestCase extends BaseTestCase
     /**
      * Dynamically execute the first method of the solution class.
      *
+     * @param  mixed ...$params
      * @return mixed
      */
-    protected function solve(): mixed
+    protected function solve(&...$params): mixed
     {
         $method = get_class_methods($this->solution)[0];
 
-        return $this->solution->$method(...func_get_args());
+        return $this->solution->$method(...$params);
     }
 
     /**

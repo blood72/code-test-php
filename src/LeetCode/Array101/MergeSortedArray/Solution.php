@@ -14,14 +14,13 @@ class Solution implements \LeetCode\SolutionInterface
      * Runtime: 12 ms
      * Memory Usage: 15.6 MB
      */
-    function merge(array $nums1, int $m, array $nums2, int $n): array
+    function merge(array &$nums1, int $m, array $nums2, int $n)
     {
-        // original condition: The final sorted array should be stored inside the array $nums1
-
         if ($n === 0) {
-            return $nums1; // return null;
+            return null;
         } elseif ($m === 0) {
-            return $nums2; // $nums1 = $nums2; return null;
+            $nums1 = $nums2;
+            return null;
         }
 
         for ($i = $m + $n - 1; $i >= 0; $i--) {
@@ -46,13 +45,13 @@ class Solution implements \LeetCode\SolutionInterface
             }
         }
 
-        return $nums1; // return null;
+        return null;
     }
 
     /**
      * sample 4-12ms submission
      */
-    function anotherAnswer1(array $nums1, int $m, array $nums2, int $n): array
+    function anotherAnswer1(array &$nums1, int $m, array $nums2, int $n)
     {
         for ($i = $m; $i < $m + $n; $i++) {
             $nums1[$i] = array_shift($nums2);
@@ -60,6 +59,6 @@ class Solution implements \LeetCode\SolutionInterface
 
         sort($nums1);
 
-        return $nums1;
+        return null;
     }
 }

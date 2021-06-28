@@ -19,6 +19,8 @@ class DuplicateZerosTest extends TestCase
     /** @dataProvider dataProvider */
     public function test($actual, $expect): void
     {
-        $this->assertEquals($expect, $this->solve($actual));
+        $this->solve($actual);
+
+        $this->assertEquals($expect, $actual);
     }
 }
